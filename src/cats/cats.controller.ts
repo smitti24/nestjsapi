@@ -1,4 +1,4 @@
-import {Controller, Get, HttpCode, Post, Req, Header, Query, Redirect, Param, Body} from '@nestjs/common';
+import {Controller, Get, HttpCode, Post, Req, Header, Query, Redirect, Param, Body, Delete} from '@nestjs/common';
 import {Observable, of} from "rxjs";
 import {CatDto} from "../dto/cat.dto";
 
@@ -28,6 +28,11 @@ export class CatsController {
     @Get()
     findAll(): Observable<any[]> {
         return of([]);
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return `This action removes a #${id} cat`;
     }
 
 
