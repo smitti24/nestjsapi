@@ -1,7 +1,6 @@
-import {Controller, Get, HttpCode, Post, Req, Header, Query, Redirect, Param, Body, Delete} from '@nestjs/common';
-import {Observable, of} from "rxjs";
-import {CatDto} from "../dto/cat.dto";
-import {CatsService} from "../services/cats.service";
+import {Controller, Get, HttpCode, Post, Header, Param, Body, Delete} from '@nestjs/common';
+import {CatsService} from "./services/cats.service";
+import {Cat} from "./interfaces/cat.interface";
 
 @Controller('cats')
 export class CatsController {
@@ -12,12 +11,12 @@ export class CatsController {
     @Post()
     @HttpCode(204)
     @Header('Cache-Control', 'none')
-    create(@Body() createCatDTO: CatDto) {
+    create(@Body() createCatDTO: Cat) {
         this.catsService.create(createCatDTO);
     }
 
     @Get()
-    async findAll(): Promise<CatDto[]> {
+    async findAll(): Promise<Cat[]> {
         return this.catsService.findAll();
     }
 
